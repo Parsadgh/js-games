@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        }
+
+        main {
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(41, 35, 35, 0.637);
+
+            >nav {
+                width: 100%;
+                height: 100px;
+                background-color: #1e1e1e;
+
+                >ul {
+                    display: flex;
+                    align-items: center;
+                    padding: 0 4%;
+                    height: 100%;
+                    width: 100%;
+
+                    >li {
+                        list-style-type: none;
+                        padding: 0 20px;
+                        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+                        color: white;
+                        text-transform: capitalize;
+                        font-size: 18px;
+                        display: flex;
+                        align-items: center;
+                        height: 100%;
+                        cursor: pointer;
+                        transition: 0.3s;
+
+                        &:hover {
+                            background-color: #333;
+                            color: crimson;
+                        }
+                    }
+                }
+            }
+
+            >section {
+                width: 100%;
+                height: calc(100% - 100px);
+                position: relative;
+
+                >div {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: rgba(255, 255, 255, 0.1);
+                    transition: 0.5s ease;
+
+                    opacity: 0;
+                    z-index: 0;
+                }
+            }
+        }
+
+        .show {
+            opacity: 1 !important;
+            z-index: 1 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <nav>
+            <ul>
+                <li>XO</li>
+                <li>rockPaperScissors</li>
+                <li>GuessTheNumber</li>
+            </ul>
+        </nav>
+
+        <section>
+            <div id="rockPaperScissors" >
+                <div class="game-container">
+                    <h1>rock 💎 paper 📄 scissors ✂️</h1>
+                    <div class="buttons">
+                        <button onclick="game('rock')">💎 rock</button>
+                        <button onclick="game('paper')">📄 paper</button>
+                        <button onclick="game('scissors')">✂️ scissors</button>
+                    </div>
+                    <div class="result">
+                        <p id="user-choice">your choice: </p>
+                        <p id="computer-choice">computer choice: </p>
+                        <p id="winner">result: </p>
+                        <p id="userScore">your score: </p>
+                        <p id="computerScore">computer score: </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="XO" class="show">
+                <!-- popup -->
+                <div class="pop" id="popup">
+                    <div class="box">
+                        <h2>Game end</h2>
+                        <button id="close-btn" onclick="reastartGame()">reastart</button>
+                    </div>
+                </div>
+
+                <!-- score board -->
+                <div class="scoreboard">
+                    <div class="score">
+                        X: <span id="x-score">0</span>
+                    </div>
+                    <div class="score">
+                        O: <span id="o-score">0</span>
+                    </div>
+                </div>
+
+                <h1>X O game</h1>
+
+                <div class="board">
+                    <div class="cell" id="1"></div>
+                    <div class="cell" id="2"></div>
+                    <div class="cell" id="3"></div>
+                    <div class="cell" id="4"></div>
+                    <div class="cell" id="5"></div>
+                    <div class="cell" id="6"></div>
+                    <div class="cell" id="7"></div>
+                    <div class="cell" id="8"></div>
+                    <div class="cell" id="9"></div>
+                </div>
+
+            </div>
+
+            <div id="GuessTheNumber">
+                <h1>Guess a number between 1 and 100</h1>
+                <input type="number" id="guessInput" min="1" max="100" />
+                <br />
+                <button onclick="checkGuess()">Guess</button>
+                <button onclick="restartGame()">Restart</button>
+
+                <div id="message"></div>
+                <div id="score">Attempts: 0</div>
+            </div>
+        </section>
+    </main>
+
+
+
+
+    <script src="master.js"></script>
+</body>
+
+<script>
+
+    const li = document.querySelectorAll('ul>li')
+    const div = document.querySelectorAll('section>div')
+
+    li.forEach((val) => {
+        val.addEventListener('click', (e) => {
+            let temp = e.target.textContent
+
+            // reset
+            div.forEach(val => val.classList.remove('show'))
+
+            // switch
+            document.getElementById(temp).classList.add('show')
+        })
+    })
+
+
+
+</script>
+
+</html>
